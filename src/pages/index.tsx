@@ -15,12 +15,7 @@ interface Props {
 }
 
 export default function Page({ initialData }: Props) {
-  const { loading, data, error, refetch } = useQuery(
-    async () => {
-      return ApiService.message.hello({ name: 'Vien' });
-    },
-    { deps: [], initialData }
-  );
+  const { loading, data, error, refetch } = useQuery(getData, { deps: [], initialData });
 
   if (loading) return <p>Loading ...</p>;
 
