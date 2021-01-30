@@ -7,8 +7,8 @@ function getData() {
 export async function getServerSideProps(context: any) {
   const { req, query, res, asPath, pathname } = context;
 
-  const initialData = await getData();
-  return { props: { initialData, host: req.headers.host } };
+  // const initialData = await getData();
+  return { props: { initialData: 'Test', host: req.headers.host } };
 }
 
 interface Props {
