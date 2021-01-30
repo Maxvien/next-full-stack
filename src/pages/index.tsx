@@ -4,22 +4,27 @@ function getData() {
   return ApiService.message.hello({ name: 'Vien' });
 }
 
-export async function getServerSideProps() {
+export async function getServerSideProps(context: any) {
+  const { req, query, res, asPath, pathname } = context;
+
   const initialData = await getData();
-  return { props: { initialData } };
+  return { props: { initialData, host: req.headers.host } };
 }
 
 interface Props {
   initialData: string;
+  host: string;
 }
 
-export default function Page({ initialData }: Props) {
+export default function Page({ initialData, host }: Props) {
   const { loading, data, error, refetch } = useQuery(
     async () => {
       return ApiService.message.hello({ name: 'Vien' });
     },
     { deps: [], initialData }
   );
+
+  console.log(host);
 
   if (loading) return <p>Loading ...</p>;
 
