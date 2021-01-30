@@ -11,7 +11,6 @@ export async function getServerSideProps(context: any) {
 
 interface Props {
   initialData: string;
-  host: string;
 }
 
 export default function Page({ initialData }: Props) {
