@@ -4,7 +4,7 @@ function getData() {
   return ApiService.message.hello({ name: 'Vien' });
 }
 
-export async function getServerSideProps(context: any) {
+export async function getServerSideProps() {
   const initialData = await getData();
   return { props: { initialData } };
 }
