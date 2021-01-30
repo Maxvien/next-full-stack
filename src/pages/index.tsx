@@ -1,4 +1,5 @@
 import { ApiService, useQuery } from '@frontend/services/api.service';
+import { EnvService } from '@shared/services/env.service';
 
 function getData() {
   return ApiService.message.hello({ name: 'Vien' });
@@ -8,7 +9,7 @@ export async function getServerSideProps(context: any) {
   const { req, query, res, asPath, pathname } = context;
 
   // const initialData = await getData();
-  return { props: { initialData: 'Test', host: req.headers.host } };
+  return { props: { initialData: 'Test', host: EnvService.get('PORT') } };
 }
 
 interface Props {
