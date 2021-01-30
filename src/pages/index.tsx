@@ -1,15 +1,12 @@
 import { ApiService, useQuery } from '@frontend/services/api.service';
-import { EnvService } from '@shared/services/env.service';
 
 function getData() {
   return ApiService.message.hello({ name: 'Vien' });
 }
 
 export async function getServerSideProps(context: any) {
-  const { req, query, res, asPath, pathname } = context;
-
-  // const initialData = await getData();
-  return { props: { initialData: 'Test', host: EnvService.get('PORT') } };
+  const initialData = await getData();
+  return { props: { initialData } };
 }
 
 interface Props {
@@ -17,15 +14,13 @@ interface Props {
   host: string;
 }
 
-export default function Page({ initialData, host }: Props) {
+export default function Page({ initialData }: Props) {
   const { loading, data, error, refetch } = useQuery(
     async () => {
       return ApiService.message.hello({ name: 'Vien' });
     },
     { deps: [], initialData }
   );
-
-  console.log(host);
 
   if (loading) return <p>Loading ...</p>;
 
