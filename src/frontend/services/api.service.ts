@@ -7,7 +7,7 @@ export { useQuery, useMuation, getFiles } from 'soki/client';
 
 export const ApiService = createClient({
   RootSchema,
-  endpoint: EnvService.isNode() ? 'http://localhost:3000/api' : '/api',
+  endpoint: EnvService.isNode() ? `http://localhost:${EnvService.get('PORT') || 3000}/api` : '/api',
   options: {
     onRequest: async () => {
       return {
