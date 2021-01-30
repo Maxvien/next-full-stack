@@ -1,9 +1,25 @@
 import { ApiService, useQuery } from '@frontend/services/api.service';
 
-export default function Page() {
-  const { loading, data, error, refetch } = useQuery(async () => {
-    return ApiService.message.hello({ name: 'Vien' });
-  }, []);
+function getData() {
+  return ApiService.message.hello({ name: 'Vien' });
+}
+
+export async function getServerSideProps() {
+  const initialData = await getData();
+  return { props: { initialData } };
+}
+
+interface Props {
+  initialData: string;
+}
+
+export default function Page({ initialData }: Props) {
+  const { loading, data, error, refetch } = useQuery(
+    async () => {
+      return ApiService.message.hello({ name: 'Vien' });
+    },
+    { deps: [], initialData }
+  );
 
   if (loading) return <p>Loading ...</p>;
 
