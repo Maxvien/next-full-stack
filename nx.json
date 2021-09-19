@@ -27,6 +27,9 @@
     ]
   },
   "projects": {
+    "server": {
+      "tags": []
+    },
     "web": {
       "tags": []
     },
