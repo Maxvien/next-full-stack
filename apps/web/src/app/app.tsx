@@ -2,6 +2,7 @@ import styled from '@emotion/styled';
 
 import { ReactComponent as Logo } from './logo.svg';
 import star from './star.svg';
+import { ApiService } from './services/api.service';
 
 const StyledApp = styled.div`
   font-family: sans-serif;
@@ -133,6 +134,10 @@ const StyledApp = styled.div`
 `;
 
 export function App() {
+  const userQuery = ApiService.useQuery(['user.all']);
+
+  console.log(userQuery);
+
   return (
     <StyledApp>
       <header className="flex">
